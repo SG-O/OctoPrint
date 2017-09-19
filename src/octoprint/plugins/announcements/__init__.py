@@ -56,30 +56,10 @@ class AnnouncementPlugin(octoprint.plugin.AssetPlugin,
 		                                              description="Important announcements about OctoPrint.",
 		                                              priority=1,
 		                                              type="rss",
-		                                              url="http://octoprint.org/feeds/important.xml"),
-		                              _releases=dict(name="Release Announcements",
-		                                             description="Announcements of new releases and release candidates of OctoPrint.",
-		                                             priority=2,
-		                                             type="rss",
-		                                             url="http://octoprint.org/feeds/releases.xml"),
-		                              _blog=dict(name="On the OctoBlog",
-		                                         description="Development news, community spotlights, OctoPrint On Air episodes and more from the official OctoBlog.",
-		                                         priority=2,
-		                                         type="rss",
-		                                         url="http://octoprint.org/feeds/octoblog.xml"),
-		                              _plugins=dict(name="New Plugins in the Repository",
-		                                            description="Announcements of new plugins released on the official Plugin Repository.",
-		                                            priority=2,
-		                                            type="rss",
-		                                            url="http://plugins.octoprint.org/feed.xml"),
-		                              _octopi=dict(name="OctoPi News",
-		                                           description="News around OctoPi, the Raspberry Pi image including OctoPrint.",
-		                                           priority=2,
-		                                           type="rss",
-		                                           url="http://octoprint.org/feeds/octopi.xml")),
+		                                              url="http://octoprint.org/feeds/important.xml")),
 		                enabled_channels=[],
 		                forced_channels=["_important"],
-		                channel_order=["_important", "_releases", "_blog", "_plugins", "_octopi"],
+		                channel_order=["_important"],
 		                ttl=6*60,
 		                display_limit=3,
 		                summary_limit=300)
@@ -93,22 +73,9 @@ class AnnouncementPlugin(octoprint.plugin.AssetPlugin,
 		if current is None:
 			# first version had different default feeds and only _important enabled by default
 			channels = self._settings.get(["channels"])
-			if "_news" in channels:
-				del channels["_news"]
-			if "_spotlight" in channels:
-				del channels["_spotlight"]
 			self._settings.set(["channels"], channels)
-
 			enabled = self._settings.get(["enabled_channels"])
 			add_blog = False
-			if "_news" in enabled:
-				add_blog = True
-				enabled.remove("_news")
-			if "_spotlight" in enabled:
-				add_blog = True
-				enabled.remove("_spotlight")
-			if add_blog and not "_blog" in enabled:
-				enabled.append("_blog")
 			self._settings.set(["enabled_channels"], enabled)
 
 	# AssetPlugin
