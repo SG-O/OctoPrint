@@ -679,7 +679,7 @@ class DiscoveryPlugin(octoprint.plugin.StartupPlugin,
 		return upnpUuid
 
 	def get_instance_name(self):
-		name = self._settings.global_get(["appearance", "name"])
+		name = self._settings.get(["appearance", "name"])
 		if name:
 			return u"GEWO HTP260 \"{}\"".format(name)
 		else:
