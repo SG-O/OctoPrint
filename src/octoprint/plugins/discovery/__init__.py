@@ -112,8 +112,8 @@ class DiscoveryPlugin(octoprint.plugin.StartupPlugin,
 		vendor = self._settings.get(["model", "vendor"])
 		vendorUrl = self._settings.get(["model", "vendorUrl"])
 		if not vendor:
-			vendor = "The OctoPrint Project"
-			vendorUrl = "http://www.octoprint.org/"
+			vendor = "GEWO"
+			vendorUrl = "http://www.gewo.net/"
 
 		response = flask.make_response(flask.render_template("discovery.xml.jinja2",
 		                                                     friendlyName=self.get_instance_name(),
@@ -681,7 +681,7 @@ class DiscoveryPlugin(octoprint.plugin.StartupPlugin,
 	def get_instance_name(self):
 		name = self._settings.global_get(["appearance", "name"])
 		if name:
-			return u"OctoPrint instance \"{}\"".format(name)
+			return u"GEWO HTP260 \"{}\"".format(name)
 		else:
 			import socket
-			return u"OctoPrint instance on {}".format(socket.gethostname())
+			return u"GEWO HTP260 {}".format(socket.gethostname())
