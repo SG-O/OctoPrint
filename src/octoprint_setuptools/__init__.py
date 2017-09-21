@@ -439,8 +439,8 @@ def get_babel_commandclasses(pot_file=None,
                              pack_name_prefix=None,
                              pack_path_prefix=None,
                              bundled_dir=None,
-                             mail_address="i18n@octoprint.org",
-                             copyright_holder="The OctoPrint Project"):
+                             mail_address="j.bayer@gewo.net",
+                             copyright_holder="GEWO"):
 	result = dict(
 		babel_new=NewTranslation.for_options(pot_file=pot_file, output_dir=output_dir),
 		babel_extract=ExtractTranslation.for_options(mapping_file=mapping_file, pot_file=pot_file, input_dirs=input_dirs, mail_address=mail_address, copyright_holder=copyright_holder),
