@@ -65,10 +65,10 @@ $(function() {
             var filepos = self.filepos() ? formatSize(self.filepos()) : "-";
             return filepos + " / " + formatSize(self.filesize());
         });
-        self.layerString = ko.pureComputed(function() {
-            if ((!layer) || (!model))
+        self.heightString = ko.pureComputed(function() {
+            if (!self.currentHeight())
                 return "-";
-            return (layer.number + 1) + " / " + model.layersTotal.toFixed(0);
+            return _.sprintf("%.02fmm", self.currentHeight());
         });
         self.printTimeString = ko.pureComputed(function() {
             if (!self.printTime())
