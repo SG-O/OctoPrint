@@ -362,7 +362,7 @@ class gcode(object):
 						                                    totalExtrusion[currentExtruder])
 						if x is not None or y is not None:
 							if layerZValid is True:
-								if layerCountStart is False:
+								if layerCountStart is False and e > 0:
 									self._logger.info("Hit")
 									layerPrevZ = layerCurrentZ
 									layerCountStart = True
