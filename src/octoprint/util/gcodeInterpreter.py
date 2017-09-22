@@ -190,6 +190,7 @@ class gcode(object):
 		self._reenqueue = True
 		self._filamentDiameter = 0
 		self._minMax = MinMax3D()
+		self.zLayerNum = 0
 
 	@property
 	def dimensions(self):
@@ -236,6 +237,11 @@ class gcode(object):
 		fwretractTime = 0
 		fwretractDist = 0
 		fwrecoverTime = 0
+		layerCount = 0
+		layerCountStart = False
+		layerPrevZ = 0.0
+		layerCurrentZ = 0.0
+		layerZValid = False
 		feedrate = min(printer_profile["axes"]["x"]["speed"], printer_profile["axes"]["y"]["speed"])
 		if feedrate == 0:
 			# some somewhat sane default if axes speeds are insane...
@@ -317,6 +323,9 @@ class gcode(object):
 						move = False
 
 					oldPos = pos
+					if z is not None:
+						layerCurrentZ = z
+						self._logger.info("Layers: {:.2f}".format(z))
 
 					# Use new coordinates if provided. If not provided, use prior coordinates (minus tool offset)
 					# in absolute and 0.0 in relative mode.
@@ -333,7 +342,8 @@ class gcode(object):
 
 					if f is not None and f != 0:
 						feedrate = f
-
+						
+					
 					if e is not None:
 						if relativeMode or relativeE:
 							# e is already relative, nothing to do
@@ -350,9 +360,22 @@ class gcode(object):
 						currentE[currentExtruder] += e
 						maxExtrusion[currentExtruder] = max(maxExtrusion[currentExtruder],
 						                                    totalExtrusion[currentExtruder])
+						if x is not None or y is not None:
+							if layerZValid is True:
+								if layerCountStart is False:
+									self._logger.info("Hit")
+									layerPrevZ = layerCurrentZ
+									layerCountStart = True
+									layerCount += 1
+								elif layerCurrentZ > layerPrevZ:
+									if e > 0:
+										layerPrevZ = layerCurrentZ
+										layerCount += 1
+
 					else:
 						e = 0.0
 
+					
 					# move time in x, y, z, will be 0 if no movement happened
 					moveTimeXYZ = abs((oldPos - pos).length / feedrate)
 
@@ -381,9 +404,12 @@ class gcode(object):
 					x = getCodeFloat(line, 'X')
 					y = getCodeFloat(line, 'Y')
 					z = getCodeFloat(line, 'Z')
+					if z is not None:
+						layerZValid = True
 					center = Vector3D(0.0, 0.0, 0.0)
 					if x is None and y is None and z is None:
 						pos = center
+						layerZValid = True
 					else:
 						pos = Vector3D(pos)
 						if x is not None:
@@ -471,6 +497,7 @@ class gcode(object):
 			radius = self._filamentDiameter / 2
 			self.extrusionVolume[i] = (self.extrusionAmount[i] * (math.pi * radius * radius)) / 1000
 		self.totalMoveTimeMinute = totalMoveTimeMinute
+		self.zLayerNum = layerCount
 
 	def _parseCuraProfileString(self, comment, prefix):
 		return {key: value for (key, value) in map(lambda x: x.split("=", 1), zlib.decompress(base64.b64decode(comment[len(prefix):])).split("\b"))}

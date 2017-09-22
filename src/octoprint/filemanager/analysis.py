@@ -323,6 +323,8 @@ class GcodeAnalysisQueue(AbstractAnalysisQueue):
 			result = dict()
 			result["printingArea"] = self._gcode.printing_area
 			result["dimensions"] = self._gcode.dimensions
+			result["layers"] = self._gcode.zLayerNum
+			self._logger.info("Layers: {:.2f}s".format(self._gcode.zLayerNum))
 			if self._gcode.totalMoveTimeMinute:
 				result["estimatedPrintTime"] = self._gcode.totalMoveTimeMinute * 60
 			if self._gcode.extrusionAmount:
