@@ -59,8 +59,8 @@
         <div>
             <button id="control-zinc" class="btn box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.sendJogCommand('z',0.1) }"><i class="icon-arrow-up"></i></button>
         </div>
-        <div style="height: 35px; padding-top: 5px;">
-			<strong data-bind="text: distanceString"></strong><br>
+        <div>
+			<button id="z-distance-info" data-bind="text: distanceString" class="btn box" data-bind="enable: false"></button>
         </div>
         <div>
             <button id="control-zdec" class="btn box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.sendJogCommand('z',-0.1) }"><i class="icon-arrow-down"></i></button>
