@@ -104,9 +104,9 @@ $(function() {
 			if (!self.distance())
                 return "-";
 			var dist = self.distance() / 10
-			if (dist < 10.0):
+			if (dist < 10.0)
 				return _.sprintf("%.02f",dist);
-			if (dist < 100.0):
+			if (dist < 100.0)
 				return _.sprintf("%.01f",dist);
 			return _.sprintf("%.00f",dist);
         });
