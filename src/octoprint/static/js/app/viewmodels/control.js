@@ -103,7 +103,12 @@ $(function() {
 		self.distanceString = ko.pureComputed(function() {
 			if (!self.distance())
                 return "-";
-            return _.sprintf("%.02f",(self.distance() / 10));
+			var dist = self.distance() / 10
+			if (dist < 10.0):
+				return _.sprintf("%.02f",dist);
+			if (dist < 100.0):
+				return _.sprintf("%.01f",dist);
+			return _.sprintf("%.00f",dist);
         });
 
         self.onEventSettingsUpdated = function (payload) {
