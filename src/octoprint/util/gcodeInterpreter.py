@@ -191,6 +191,7 @@ class gcode(object):
 		self._filamentDiameter = 0
 		self._minMax = MinMax3D()
 		self.zLayerNum = 0
+		self.layerString = dict()
 
 	@property
 	def dimensions(self):
@@ -242,6 +243,7 @@ class gcode(object):
 		layerPrevZ = 0.0
 		layerCurrentZ = 0.0
 		layerZValid = False
+		layerList = [0]
 		feedrate = min(printer_profile["axes"]["x"]["speed"], printer_profile["axes"]["y"]["speed"])
 		if feedrate == 0:
 			# some somewhat sane default if axes speeds are insane...
@@ -325,7 +327,6 @@ class gcode(object):
 					oldPos = pos
 					if z is not None:
 						layerCurrentZ = z
-						self._logger.info("Layers: {:.2f}".format(z))
 
 					# Use new coordinates if provided. If not provided, use prior coordinates (minus tool offset)
 					# in absolute and 0.0 in relative mode.
@@ -363,13 +364,14 @@ class gcode(object):
 						if x is not None or y is not None:
 							if layerZValid is True:
 								if layerCountStart is False and e > 0:
-									self._logger.info("Hit")
 									layerPrevZ = layerCurrentZ
 									layerCountStart = True
+									layerList[0] = readBytes
 									layerCount += 1
 								elif layerCurrentZ > layerPrevZ:
 									if e > 0:
 										layerPrevZ = layerCurrentZ
+										layerList.append(readBytes)
 										layerCount += 1
 
 					else:
@@ -498,7 +500,10 @@ class gcode(object):
 			self.extrusionVolume[i] = (self.extrusionAmount[i] * (math.pi * radius * radius)) / 1000
 		self.totalMoveTimeMinute = totalMoveTimeMinute
 		self.zLayerNum = layerCount
-
+		linesa = 1.0
+		for i in range(len(layerList)):
+			self.layerString["layer%d" % (i + 1)] = layerList[i]
+			
 	def _parseCuraProfileString(self, comment, prefix):
 		return {key: value for (key, value) in map(lambda x: x.split("=", 1), zlib.decompress(base64.b64decode(comment[len(prefix):])).split("\b"))}
 

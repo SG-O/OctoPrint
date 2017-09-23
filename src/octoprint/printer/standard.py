@@ -896,6 +896,8 @@ class Printer(PrinterInterface, comm.MachineComPrintCallback):
 			averagePrintTime = None
 			date = None
 			filament = None
+			layerList = None
+			layers = None
 			if path_on_disk:
 				# Use a string for mtime because it could be float and the
 				# javascript needs to exact match
@@ -912,6 +914,11 @@ class Printer(PrinterInterface, comm.MachineComPrintCallback):
 							estimatedPrintTime = fileData["analysis"]["estimatedPrintTime"]
 						if "filament" in fileData["analysis"].keys():
 							filament = fileData["analysis"]["filament"]
+						if layers is None and "layers" in fileData["analysis"]:
+							layers = fileData["analysis"]["layers"]
+						if "layerList" in fileData["analysis"].keys():
+							layerList = fileData["analysis"]["layerList"]
+							self._logger.info("Layers: {}".format(layerList))
 					if "statistics" in fileData:
 						printer_profile = self._printerProfileManager.get_current_or_default()["id"]
 						if "averagePrintTime" in fileData["statistics"] and printer_profile in fileData["statistics"]["averagePrintTime"]:
@@ -939,6 +946,8 @@ class Printer(PrinterInterface, comm.MachineComPrintCallback):
 				"averagePrintTime": averagePrintTime,
 				"lastPrintTime": lastPrintTime,
 				"filament": filament,
+				"zlayers": layers,
+				"layerList": layerList,
 			})
 
 	def _sendInitialStateUpdate(self, callback):

@@ -43,6 +43,8 @@ $(function() {
         self.lastPrintTime = ko.observable(undefined);
 
         self.currentHeight = ko.observable(undefined);
+		self.zlayers = ko.observable(undefined);
+		self.zlayerList = ko.observableArray([]);
 
         self.TITLE_PRINT_BUTTON_PAUSED = gettext("Restarts the print job from the beginning");
         self.TITLE_PRINT_BUTTON_UNPAUSED = gettext("Starts the print job");
@@ -69,6 +71,12 @@ $(function() {
             if (!self.currentHeight())
                 return "-";
             return _.sprintf("%.02fmm", self.currentHeight());
+        });
+		self.layerString = ko.pureComputed(function() {
+            var strg1 = "-";
+			if (self.zlayers())
+                strg1 = self.zlayers();
+            return self._getLayer() + " / " + strg1;
         });
         self.printTimeString = ko.pureComputed(function() {
             if (!self.printTime())
@@ -175,6 +183,23 @@ $(function() {
         self.fromTimelapseData = function(data) {
             self.timelapse(data);
         };
+		
+		self._getLayer = function() {
+			if (self.zlayerList().length <= 0)
+                return "-";
+			var npos = 0;
+			if (self.filepos())
+				npos = self.filepos();
+			var result = "0";
+			var maxheight = 0;
+			for (i = 0; i < self.zlayerList().length; i++) {
+				if (self.zlayerList()[i].data() <= npos && self.zlayerList()[i].data() > maxheight){
+					result = self.zlayerList()[i].name();
+					maxheight = self.zlayerList()[i].data();
+				}
+			}
+			return result;
+		};
 
         self._fromData = function(data) {
             self._processStateData(data.state);
@@ -219,6 +244,11 @@ $(function() {
                 self.filesize(undefined);
                 self.sd(undefined);
             }
+			if (data.zlayers) {
+				self.zlayers(data.zlayers);
+			} else {
+				self.zlayers(undefined);
+			}
 
             self.estimatedPrintTime(data.estimatedPrintTime);
             self.lastPrintTime(data.lastPrintTime);
@@ -234,7 +264,18 @@ $(function() {
                     });
                 }
             }
-            self.filament(result);
+			var result2 = [];
+			if (data.layerList && typeof(data.layerList) == "object" && _.keys(data.layerList).length > 0) {
+                for (var key in data.layerList) {
+                    if (!_.startsWith(key, "layer") || !data.layerList[key]) continue;
+					result2.push({
+                        name: ko.observable(key.substr("layer".length)),
+                        data: ko.observable(data.layerList[key])
+                    });
+                }
+            }
+			self.zlayerList(result2);
+			self.filament(result);
         };
 
         self._processProgressData = function(data) {
