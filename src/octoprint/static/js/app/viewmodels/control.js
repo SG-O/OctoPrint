@@ -99,6 +99,12 @@ $(function() {
             self.isReady(data.flags.ready);
             self.isLoading(data.flags.loading);
         };
+		
+		self.distanceString = ko.pureComputed(function() {
+			if (!self.distance())
+                return "-";
+            return _.sprintf("%.02f",(self.distance() / 10));
+        });
 
         self.onEventSettingsUpdated = function (payload) {
             // the webcam url might have changed, make sure we replace it now if the tab is focused
