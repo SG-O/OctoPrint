@@ -3,6 +3,30 @@
         <legend>{{ _('Set Temperature') }}</legend>
         <p>
             {{ _('Select your current materials tool temperature!') }}
+			<div class="input-append">
+                <input type="number" class="input-mini text-right tempInput" data-bind="value: toolTemp, enable: $root.loginState.isUser()">
+                <span class="add-on">&deg;C</span>
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" data-bind="enable: $root.loginState.isUser()">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- ko foreach: $root.temperature_profiles -->
+                        <li>
+                            <a href="#" data-bind="click: function() {$root.setTargetFromProfile($parent, $data);}, text: 'Set ' + name + ' (' + (extruder) + '&deg;C)'"></a>
+                        </li>
+                        <!-- /ko -->
+                        <li class="divider"></li>
+                    </ul>
+                </div>
+            </div>
+		</p>
+		<p>
+			<div class="btn-group" id="toolSelect">
+				<!-- ko foreach: $root.tools -->
+				<button class="btn distance" data-bind="enable: $root.loginState.isUser(), text: 'Change ' + $data.name()"></button>
+				<!-- /ko -->
+			</div>
         </p>
     </fieldset>
 	<fieldset>

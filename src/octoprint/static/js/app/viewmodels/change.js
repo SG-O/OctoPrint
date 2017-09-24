@@ -3,27 +3,29 @@ $(function() {
         var self = this;
 
         self.loginState = parameters[0];
-        self.users = parameters[1];
-
-        self.changeDialog = undefined;
-
-        self.currentUser = ko.observable(undefined);
+		self.temperatureViewModel = parameters[1];
+		self.settingsViewModel = parameters[2];
+		
+		self.toolTemp = ko.observable(0);
+		
+		self.temperature_profiles = self.settingsViewModel.temperature_profiles;
+		self.tools = self.temperatureViewModel.tools;
+		
+		self.setTargetFromProfile = function(item, profile) {
+            if (!profile) return;
+			self.toolTemp(profile.extruder);
+        };
 
         self.show = function(user) {
             if (!CONFIG_ACCESS_CONTROL) return;
-
             if (user == undefined) {
                 user = self.loginState.currentUser();
             }
-
-            self.currentUser(user);
             self.changeDialog.modal("show");
         };
 
         self.done = function() {
             if (!CONFIG_ACCESS_CONTROL) return;
-
-			self.currentUser(undefined);
 			self.changeDialog.modal("hide");
         };
 
@@ -47,8 +49,8 @@ $(function() {
     }
 
     OCTOPRINT_VIEWMODELS.push([
-        UserSettingsViewModel,
-        ["loginStateViewModel", "usersViewModel"],
-        ["#usersettings_dialog"]
+        ChangeViewModel,
+        ["loginStateViewModel", "temperatureViewModel", "settingsViewModel"],
+        ["#change_dialog"]
     ]);
 });
