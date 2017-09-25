@@ -4,7 +4,7 @@ $(function() {
 
         self.loginState = parameters[0];
         self.settings = parameters[1];
-
+		self.change = parameters[2];
         self._createToolEntry = function () {
             return {
                 name: ko.observable(),
@@ -568,7 +568,7 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push([
         ControlViewModel,
-        ["loginStateViewModel", "settingsViewModel"],
+        ["loginStateViewModel", "settingsViewModel", "changeViewModel"],
         "#control"
     ]);
 });
