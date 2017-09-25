@@ -465,7 +465,7 @@ def _process_templates():
 		tab=dict(add="append", key="name"),
 		settings=dict(add="custom_append", key="name", custom_add_entries=lambda missing: dict(section_plugins=(gettext("Plugins"), None)), custom_add_order=lambda missing: ["section_plugins"] + missing),
 		usersettings=dict(add="append", key="name"),
-		change=dict(add="append", key="name"),
+		change=dict(add="prepend", key=None),
 		wizard=dict(add="append", key="name", key_extractor=lambda d, k: "0:{}".format(d[0]) if "mandatory" in d[1] and d[1]["mandatory"] else "1:{}".format(d[0])),
 		about=dict(add="append", key="name"),
 		generic=dict(add="append", key=None)

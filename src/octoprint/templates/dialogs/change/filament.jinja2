@@ -2,7 +2,7 @@
     <fieldset data-bind="visible: isFirstStep">
 		<legend>{{ _('Set Temperature') }}</legend>
 		<p>
-			{{ _('Select your current materials tool temperature!') }}
+			{{ _('Select your inserted materials tool temperature!') }}
 			<div class="input-append">
 				<input type="number" class="input-mini text-right tempInput" data-bind="value: toolTemp, enable: $root.loginState.isUser()">
 				<span class="add-on">&deg;C</span>
@@ -27,11 +27,16 @@
 				<!-- /ko -->
 			</div>
 		</p>
+		<br>
+		<br>
+		<br>
     </fieldset>
 	<fieldset data-bind="visible: isSecondStep">
         <legend>{{ _('Remove Filament') }}</legend>
         <p>
-            {{ _('Slowly remove the current filament') }}
+            {{ _('Slowly remove the filament.') }}
+			<br>
+			<img src="static/img/filaRemove.png">
         </p>
     </fieldset>
 	<fieldset data-bind="visible: isThirdStep">
@@ -57,22 +62,22 @@
 		</p>
 		<p>
 			<div class="btn-group" id="toolSelect">
-				<!-- ko foreach: $root.tools -->
-				<button type="submit" class="btn distance" data-bind="click: $root.sendSelectToolCommand, enable: $root.loginState.isUser(), text: 'Change ' + $data.name()"></button>
-				<!-- /ko -->
+				<button type="submit" class="btn distance" data-bind="click: $root.setCurrentToolCommand, enable: $root.loginState.isUser(), text: 'Set temperature'"></button>
 			</div>
 		</p>
     </fieldset>
 	<fieldset data-bind="visible: isFourthStep">
         <legend>{{ _('Insert Filament') }}</legend>
         <p>
-            {{ _('Carefully insert the new filament') }}
+            {{ _('Carefully insert the new filament! Click on "Next" when material comes out of the nozzle.') }}
+			<br>
+			<img src="static/img/filaInsert.png">
         </p>
     </fieldset>
 	<fieldset data-bind="visible: isHeatingStep">
         <legend>{{ _('Heating') }}</legend>
         <p>
-            {{ _('Please Wait for the tool to heat up! (') }}
+            {{ _('Please wait for the tool to heat up! (') }}
 			<span data-bind="text: actual()+ '&deg;C / ' + toolTemp() + '&deg;C)'"></span>
         </p>
     </fieldset>
