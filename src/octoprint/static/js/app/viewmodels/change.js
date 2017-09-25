@@ -14,6 +14,9 @@ $(function() {
 		self.step = ko.observable(0);
 		self.currentTool = "";
 		self.actual = ko.observable(0.0);
+		self.n = Date.now();
+		self.oldTime = ko.observable(0);
+		self.doExtrude = ko.observable(false);
 		
 		self.setTargetFromProfile = function(item, profile) {
             if (!profile) return;
@@ -29,13 +32,21 @@ $(function() {
             self.changeDialog.modal("show");
         };
 
-        self.done = function() {
+        self.done = ko.pureComputed(function() {
+			if ((self.step() == 0) || (self.step() == 2) || (self.step() >= 100)) return;
             self.step(self.step() + 1);
 			if (self.step() > 1000) self.changeDialog.modal("hide");
-        };
+			if (self.step() > 3){
+				self.changeDialog.modal("hide");
+				self.doExtrude(false);
+				var data2 = {};
+				data2[self.currentTool] = 0;
+				self._sendSelToolCommand(data2);
+			}
+        });
 
         self.doneEnabled = function() {
-			if ((self.step == 0) || (self.step == 2)) return false;
+			if ((self.step() == 0) || (self.step() == 2) || (self.step() >= 100)) return false;
             return true;
         };
 		
@@ -46,6 +57,10 @@ $(function() {
 			self.currentTool = data.key();
             data2[data.key()] = parseInt(self.toolTemp());
 			if (data2[data.key()] < 30) return;
+			self._sendSelToolCommand(data2);
+        };
+		
+		self._sendSelToolCommand = function (data2) {
 			var onSuccess = function() {
                 self.step(self.step() + 100);
             };
@@ -53,14 +68,23 @@ $(function() {
 				.done(onSuccess);
         };
 		
+		self.setCurrentToolCommand = function (data) {
+			if (!self.toolTemp) return;
+			var data2 = {};
+            data2[self.currentTool] = parseInt(self.toolTemp());
+			if (data2[self.currentTool] < 30) return;
+			self._sendSelToolCommand(data2);
+        };
+		
 		self.isFirstStep = ko.pureComputed(function () {
             return self.step() == 0;
         });
 		
 		self.isSecondStep = ko.pureComputed(function () {
-			OctoPrint.printer.selectTool(self.currentTool);
-			OctoPrint.printer.setFlowrate(10);
-			OctoPrint.printer.extrude(-20);
+			if (self.step()  == 3) {
+				OctoPrint.printer.selectTool(self.currentTool);
+				OctoPrint.printer.extrude(-20);
+			}
             return self.step() == 1;
         });
 		
@@ -69,6 +93,7 @@ $(function() {
         });
 		
 		self.isFourthStep = ko.pureComputed(function () {
+			if (self.step()  == 3) self.doExtrude(true);
             return self.step() == 3;
         });
 		
@@ -85,6 +110,19 @@ $(function() {
 					self.actual(element.actual());
 				}
 			});
+			if (self.doExtrude()){
+				self.n = Date.now();
+				var flow = 5; // mm/sec
+				var exLeng = 10; // mm
+				var exTime = (exLeng / flow) * 1000;
+				exTime = exTime + 1000;
+				if ((self.n - exTime) > self.oldTime()){
+					log.info("Extrude");
+					self.oldTime(self.n + 1);
+					OctoPrint.printer.selectTool(self.currentTool);
+					OctoPrint.control.sendGcode("G1 E" + exLeng + " F" + (flow * 60));
+				}
+			}
         };
 		
 		self._setToolTemperature = function(data) {
