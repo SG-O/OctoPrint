@@ -31,7 +31,7 @@ $(function() {
 
         self.done = function() {
             self.step(self.step() + 1);
-			if (self.step() > 1000)) self.changeDialog.modal("hide");
+			if (self.step() > 1000) self.changeDialog.modal("hide");
         };
 
         self.doneEnabled = function() {
