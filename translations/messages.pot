@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: OctoPrint 1.4.0.dev316+g3002a07.dirty\n"
+"Project-Id-Version: OctoPrint 0+unknown\n"
 "Report-Msgid-Bugs-To: j.bayer@gewo.net\n"
-"POT-Creation-Date: 2017-09-25 18:57+0200\n"
+"POT-Creation-Date: 2017-09-26 06:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,12 +103,12 @@ msgstr ""
 
 #: src/octoprint/plugins/corewizard/__init__.py:80
 #: src/octoprint/plugins/corewizard/templates/corewizard_acl_wizard.jinja2:1
-#: src/octoprint/server/views.py:559
+#: src/octoprint/server/views.py:557
 msgid "Access Control"
 msgstr ""
 
 #: src/octoprint/plugins/corewizard/__init__.py:125
-#: src/octoprint/server/views.py:553
+#: src/octoprint/server/views.py:551
 msgid "Webcam & Timelapse"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgstr ""
 
 #: src/octoprint/plugins/corewizard/templates/corewizard_printerprofile_wizard.jinja2:7
 #: src/octoprint/templates/snippets/settings/printerprofiles/profileEditor.jinja2:9
-#: src/octoprint/templates/tabs/control.jinja2:112
+#: src/octoprint/templates/tabs/control.jinja2:113
 msgid "General"
 msgstr ""
 
@@ -1026,7 +1026,7 @@ msgid "Software Update"
 msgstr ""
 
 #: src/octoprint/plugins/softwareupdate/__init__.py:890
-#: src/octoprint/server/views.py:557
+#: src/octoprint/server/views.py:555
 #: src/octoprint/static/js/app/viewmodels/appearance.js:13
 #: src/octoprint/static/js/app/viewmodels/appearance.js:18
 #: src/octoprint/static/js/app/viewmodels/appearance.js:20
@@ -1355,125 +1355,113 @@ msgstr ""
 msgid "OctoPrint version tracking"
 msgstr ""
 
-#: src/octoprint/server/views.py:466
+#: src/octoprint/server/views.py:465
 msgid "Plugins"
 msgstr ""
 
-#: src/octoprint/server/views.py:524
+#: src/octoprint/server/views.py:522
 msgid "Connection"
 msgstr ""
 
-#: src/octoprint/server/views.py:525
+#: src/octoprint/server/views.py:523
 #: src/octoprint/templates/sidebar/state.jinja2:1
 msgid "State"
 msgstr ""
 
-#: src/octoprint/server/views.py:526
+#: src/octoprint/server/views.py:524
 msgid "Files"
 msgstr ""
 
-#: src/octoprint/server/views.py:532
+#: src/octoprint/server/views.py:530
 msgid "Temperature"
 msgstr ""
 
-#: src/octoprint/server/views.py:533
+#: src/octoprint/server/views.py:531
 msgid "Control"
 msgstr ""
 
-#: src/octoprint/server/views.py:534
+#: src/octoprint/server/views.py:532
 msgid "GCode Viewer"
 msgstr ""
 
-#: src/octoprint/server/views.py:535
+#: src/octoprint/server/views.py:533
 msgid "Terminal"
 msgstr ""
 
-#: src/octoprint/server/views.py:536
+#: src/octoprint/server/views.py:534
 #: src/octoprint/templates/sidebar/state.jinja2:4
 msgid "Timelapse"
 msgstr ""
 
-#: src/octoprint/server/views.py:542
+#: src/octoprint/server/views.py:540
 msgid "Printer"
 msgstr ""
 
-#: src/octoprint/server/views.py:544
+#: src/octoprint/server/views.py:542
 msgid "Serial Connection"
 msgstr ""
 
-#: src/octoprint/server/views.py:545
+#: src/octoprint/server/views.py:543
 #: src/octoprint/templates/dialogs/settings/printerprofiles.jinja2:1
 msgid "Printer Profiles"
 msgstr ""
 
-#: src/octoprint/server/views.py:546
+#: src/octoprint/server/views.py:544
 msgid "Temperatures"
 msgstr ""
 
-#: src/octoprint/server/views.py:547
+#: src/octoprint/server/views.py:545
 msgid "Terminal Filters"
 msgstr ""
 
-#: src/octoprint/server/views.py:548
+#: src/octoprint/server/views.py:546
 msgid "GCODE Scripts"
 msgstr ""
 
-#: src/octoprint/server/views.py:550 src/octoprint/server/views.py:552
+#: src/octoprint/server/views.py:548 src/octoprint/server/views.py:550
 msgid "Features"
 msgstr ""
 
-#: src/octoprint/server/views.py:554
+#: src/octoprint/server/views.py:552
 msgid "GCODE Visualizer"
 msgstr ""
 
-#: src/octoprint/server/views.py:555
+#: src/octoprint/server/views.py:553
 msgid "API"
 msgstr ""
 
-#: src/octoprint/server/views.py:560
+#: src/octoprint/server/views.py:558
 #: src/octoprint/templates/dialogs/settings/folders.jinja2:2
 #: src/octoprint/templates/sidebar/files_header.jinja2:10
 msgid "Folders"
 msgstr ""
 
-#: src/octoprint/server/views.py:561
+#: src/octoprint/server/views.py:559
 msgid "Appearance"
 msgstr ""
 
-#: src/octoprint/server/views.py:562
+#: src/octoprint/server/views.py:560
 #: src/octoprint/templates/dialogs/settings/logs.jinja2:2
 msgid "Logs"
 msgstr ""
 
-#: src/octoprint/server/views.py:563
+#: src/octoprint/server/views.py:561
 msgid "Server"
 msgstr ""
 
-#: src/octoprint/server/views.py:569
+#: src/octoprint/server/views.py:567
 msgid "Access"
 msgstr ""
 
-#: src/octoprint/server/views.py:570
+#: src/octoprint/server/views.py:568
 msgid "Interface"
 msgstr ""
 
-#: src/octoprint/server/views.py:574
-#: src/octoprint/static/js/app/viewmodels/files.js:614
-#: src/octoprint/static/js/app/viewmodels/files.js:619
-#: src/octoprint/static/js/app/viewmodels/gcode.js:496
-#: src/octoprint/static/js/app/viewmodels/gcode.js:499
-msgid "Filament"
-msgstr ""
-
-#: src/octoprint/server/views.py:575
-msgid "Nozzle"
-msgstr ""
-
-#: src/octoprint/server/views.py:591
+#: src/octoprint/server/views.py:584
 msgid "Start"
 msgstr ""
 
-#: src/octoprint/server/views.py:592
+#: src/octoprint/server/views.py:585
 #: src/octoprint/templates/dialogs/wizard.jinja2:57
 msgid "Finish"
 msgstr ""
@@ -1719,7 +1707,7 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
-#: src/octoprint/static/js/app/viewmodels/control.js:73
+#: src/octoprint/static/js/app/viewmodels/control.js:74
 #: src/octoprint/static/js/app/viewmodels/files.js:619
 #: src/octoprint/static/js/app/viewmodels/gcode.js:499
 #: src/octoprint/static/js/app/viewmodels/printerstate.js:262
@@ -1727,7 +1715,7 @@ msgstr ""
 msgid "Tool"
 msgstr ""
 
-#: src/octoprint/static/js/app/viewmodels/control.js:80
+#: src/octoprint/static/js/app/viewmodels/control.js:81
 #: src/octoprint/static/js/app/viewmodels/temperature.js:77
 msgid "Hotend"
 msgstr ""
@@ -1754,6 +1742,13 @@ msgstr ""
 #: src/octoprint/static/js/app/viewmodels/files.js:608
 #: src/octoprint/static/js/app/viewmodels/gcode.js:458
 msgid "Model size"
+msgstr ""
+
+#: src/octoprint/static/js/app/viewmodels/files.js:614
+#: src/octoprint/static/js/app/viewmodels/files.js:619
+#: src/octoprint/static/js/app/viewmodels/gcode.js:496
+#: src/octoprint/static/js/app/viewmodels/gcode.js:499
+msgid "Filament"
 msgstr ""
 
 #: src/octoprint/static/js/app/viewmodels/files.js:623
@@ -2455,6 +2450,106 @@ msgstr ""
 msgid "This will delete the API Key. It will cease to to function immediately."
 msgstr ""
 
+#: src/octoprint/templates/dialogs/change.jinja2:4
+#: src/octoprint/templates/tabs/control.jinja2:107
+msgid "Change Filament"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:9
+#: src/octoprint/templates/dialogs/change.jinja2:49
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:9
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:50
+msgid "Set Temperature"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:11
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:11
+msgid "Select your inserted materials tool temperature!"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:41
+msgid "Remove Filament"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:43
+msgid "Slowly remove the filament."
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:51
+msgid "Select your new materials tool temperature!"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:76
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:85
+msgid "Insert Filament"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:78
+msgid ""
+"Carefully insert the new filament! Click on \"Next\" when material comes "
+"out of the nozzle."
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:84
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:91
+msgid "Heating"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:86
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:93
+msgid "Please wait for the tool to heat up! ("
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:93
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:100
+#: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:80
+#: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:109
+#: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:151
+#: src/octoprint/templates/snippets/settings/printerprofiles/profileEditor.jinja2:37
+msgid "Abort"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/change.jinja2:94
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:101
+#: src/octoprint/templates/dialogs/wizard.jinja2:56
+msgid "Next"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:4
+#: src/octoprint/templates/tabs/control.jinja2:108
+msgid "Change Nozzle"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:41
+msgid "Remove Nozzle"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:43
+msgid ""
+"Carefully remove the nozzle. Caution the nozzle may be hot! Then Click on"
+" \"Next\". ("
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:52
+msgid "You may want to choose another tool temperature!"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:77
+msgid "Insert Nozzle"
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:79
+msgid ""
+"Carefully insert a new nozzle. Caution the printhead may be hot! Then "
+"Click on \"Next\"."
+msgstr ""
+
+#: src/octoprint/templates/dialogs/changenozzle.jinja2:87
+msgid ""
+"Carefully push the filament until the material is extruded. Then Click on"
+" \"Next\"."
+msgstr ""
+
 #: src/octoprint/templates/dialogs/files.jinja2:4
 msgid "Create Folder"
 msgstr ""
@@ -2542,10 +2637,6 @@ msgid ""
 "                                        "
 msgstr ""
 
-#: src/octoprint/templates/dialogs/wizard.jinja2:56
-msgid "Next"
-msgstr ""
-
 #: src/octoprint/templates/dialogs/wizard.jinja2:60
 msgid "Previous"
 msgstr ""
@@ -2558,71 +2649,6 @@ msgstr ""
 
 #: src/octoprint/templates/dialogs/about/about.jinja2:3
 msgid "The snappy web interface for your 3D printer"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:3
-#: src/octoprint/templates/dialogs/change/filament.jinja2:43
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:3
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:15
-msgid "Set Temperature"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:5
-msgid "Select your inserted materials tool temperature!"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:35
-msgid "Remove Filament"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:37
-msgid "Slowly remove the filament."
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:45
-msgid "Select your new materials tool temperature!"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:70
-msgid "Insert Filament"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:72
-msgid ""
-"Carefully insert the new filament! Click on \"Next\" when material comes "
-"out of the nozzle."
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:78
-msgid "Heating"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/filament.jinja2:80
-msgid "Please wait for the tool to heat up! ("
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:5
-msgid "Select your current materials tool temperature!"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:9
-msgid "Remove Nozzle"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:11
-msgid "Carefully remove the nozzle. Caution the nozzle may be hot!"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:17
-msgid "Carefully insert a new nozzle. Caution the printhead may be hot!"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:21
-msgid "Push Filament"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/change/nozzle.jinja2:23
-msgid "Carefully push the filament until the material is extruded"
 msgstr ""
 
 #: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:5
@@ -2672,13 +2698,6 @@ msgstr ""
 #: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:128
 #: src/octoprint/templates/dialogs/usersettings/access.jinja2:14
 msgid "Repeat Password"
-msgstr ""
-
-#: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:80
-#: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:109
-#: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:151
-#: src/octoprint/templates/snippets/settings/printerprofiles/profileEditor.jinja2:37
-msgid "Abort"
 msgstr ""
 
 #: src/octoprint/templates/dialogs/settings/accesscontrol.jinja2:81
@@ -3999,15 +4018,11 @@ msgstr ""
 msgid "Retract"
 msgstr ""
 
-#: src/octoprint/templates/tabs/control.jinja2:104
-msgid "Change"
-msgstr ""
-
-#: src/octoprint/templates/tabs/control.jinja2:107
+#: src/octoprint/templates/tabs/control.jinja2:106
 msgid "Flow rate:"
 msgstr ""
 
-#: src/octoprint/templates/tabs/control.jinja2:114
+#: src/octoprint/templates/tabs/control.jinja2:115
 msgid "Motors off"
 msgstr ""
 

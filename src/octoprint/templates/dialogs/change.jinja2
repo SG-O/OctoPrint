@@ -1,49 +1,96 @@
 <div id="change_dialog" class="modal hide fade">
     <div class="modal-header">
         <a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-        <h3>{{ _('Change') }}</h3>
+        <h3>{{ _('Change Filament') }}</h3>
     </div>
     <div class="modal-body">
-        <ul class="nav nav-pills">
-            {% set mark_active = True %}
-            {% for key in templates.change.order %}
-                {% set entry, data = templates.change.entries[key] %}
-                {% if data is none %}
-                    <li class="nav-header">{{ entry }}</li>
-                {% else %}
-                    {% if "custom_bindings" not in data or data["custom_bindings"] %}<!-- ko allowBindings: false -->{% endif %}
-                    <li id="{{ data._div }}_link"
-                        {% if "data_bind" in data %}data-bind="{{ data.data_bind }}"{% endif %}
-                        class="{% if mark_active %}active{% set mark_active = False %}{% endif %} {% if "classes_link" in data %}{{ data.classes_link|join(' ') }}{% elif "classes" in data %}{{ data.classes|join(' ') }}{% endif %}"
-                            {% if "styles_link" in data %} style="{{ data.styles_link|join(', ') }}" {% elif "styles" in data %} style="{{ data.styles|join(', ') }}" {% endif %}
-                            >
-                        <a href="#{{ data._div }}" data-toggle="tab">{{ entry|e }}</a>
-                    </li>
-                    {% if "custom_bindings" not in data or data["custom_bindings"] %}<!-- /ko -->{% endif %}
-                {% endif %}
-            {% endfor %}
-        </ul>
-
-        <div class="tab-content">
-            {% set mark_active = True %}
-            {% for key in templates.change.order %}
-                {% set entry, data = templates.change.entries[key] %}
-                {% if data is not none %}
-                    {% if "custom_bindings" not in data or data["custom_bindings"] %}<!-- ko allowBindings: false -->{% endif %}
-                    <div id="{{ data._div }}"
-                         {% if "data_bind" in data %}data-bind="{{ data.data_bind }}"{% endif %}
-                         class="tab-pane {% if mark_active %}active{% set mark_active = False %}{% endif %} {% if classes_content in data %}{{ data.classes_content|join(' ') }}{% elif classes in data %}{{ data.classes|join(' ') }}{% endif %}"
-                            {% if "styles_content" in data %} style="{{ data.styles_content|join(', ') }}" {% elif styles in data %} style="{{ data.styles|join(', ') }}" {% endif %}
-                            >
-                         {% try "There was an error with the template {filename} at line number {lineno}: {exception}" %}{% include data.template ignore missing %}{% endtry %}
-                    </div>
-                    {% if "custom_bindings" not in data or data["custom_bindings"] %}<!-- /ko -->{% endif %}
-                {% endif %}
-            {% endfor %}
-        </div>
+        <form class="form-horizontal">
+			<fieldset data-bind="visible: isFirstStep">
+				<legend>{{ _('Set Temperature') }}</legend>
+				<p>
+					{{ _('Select your inserted materials tool temperature!') }}
+					<div class="input-append">
+						<input type="number" class="input-mini text-right tempInput" data-bind="value: toolTemp, enable: $root.loginState.isUser()">
+						<span class="add-on">&deg;C</span>
+						<div class="btn-group">
+							<button class="btn dropdown-toggle" data-toggle="dropdown" data-bind="enable: $root.loginState.isUser()">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<!-- ko foreach: $root.temperature_profiles -->
+								<li>
+									<a href="#" data-bind="click: function() {$root.setTargetFromProfile($parent, $data);}, text: 'Set ' + name + ' (' + (extruder) + '&deg;C)'"></a>
+								</li>
+								<!-- /ko -->
+							</ul>
+						</div>
+					</div>
+				</p>
+				<p>
+					<div class="btn-group" id="toolSelect">
+						<!-- ko foreach: $root.tools -->
+						<button type="submit" class="btn distance" data-bind="click: $root.sendSelectToolCommand, enable: $root.loginState.isUser(), text: 'Change ' + $data.name()"></button>
+						<!-- /ko -->
+					</div>
+				</p>
+				<br>
+				<br>
+				<br>
+			</fieldset>
+			<fieldset data-bind="visible: isSecondStep">
+				<legend>{{ _('Remove Filament') }}</legend>
+				<p>
+					{{ _('Slowly remove the filament.') }}
+					<br>
+					<img src="static/img/filaRemove.png">
+				</p>
+			</fieldset>
+			<fieldset data-bind="visible: isThirdStep">
+				<legend>{{ _('Set Temperature') }}</legend>
+				<p>
+					{{ _('Select your new materials tool temperature!') }}
+					<div class="input-append">
+						<input type="number" class="input-mini text-right tempInput" data-bind="value: toolTemp, enable: $root.loginState.isUser()">
+						<span class="add-on">&deg;C</span>
+						<div class="btn-group">
+							<button class="btn dropdown-toggle" data-toggle="dropdown" data-bind="enable: $root.loginState.isUser()">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<!-- ko foreach: $root.temperature_profiles -->
+								<li>
+									<a href="#" data-bind="click: function() {$root.setTargetFromProfile($parent, $data);}, text: 'Set ' + name + ' (' + (extruder) + '&deg;C)'"></a>
+								</li>
+								<!-- /ko -->
+							</ul>
+						</div>
+					</div>
+				</p>
+				<p>
+					<div class="btn-group" id="toolSelect">
+						<button type="submit" class="btn distance" data-bind="click: $root.setCurrentToolCommand, enable: $root.loginState.isUser(), text: 'Set temperature'"></button>
+					</div>
+				</p>
+			</fieldset>
+			<fieldset data-bind="visible: isFourthStep">
+				<legend>{{ _('Insert Filament') }}</legend>
+				<p>
+					{{ _('Carefully insert the new filament! Click on "Next" when material comes out of the nozzle.') }}
+					<br>
+					<img src="static/img/filaInsert.png">
+				</p>
+			</fieldset>
+			<fieldset data-bind="visible: isHeatingStep">
+				<legend>{{ _('Heating') }}</legend>
+				<p>
+					{{ _('Please wait for the tool to heat up! (') }}
+					<span data-bind="text: actual()+ '&deg;C / ' + toolTemp() + '&deg;C)'"></span>
+				</p>
+			</fieldset>
+		</form>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">{{ _('Abort') }}</button>
-        <button class="btn btn-primary" data-bind="click: function() { done(); }, enable: doneEnabled()">{{ _('Weiter') }}</button>
+        <button class="btn btn-primary" data-bind="click: function() { done(); }, enable: doneEnabled()">{{ _('Next') }}</button>
     </div>
 </div>
