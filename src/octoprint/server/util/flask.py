@@ -1299,6 +1299,7 @@ def collect_core_assets(enable_gcodeviewer=True, preferred_stylesheet="css"):
 		'js/app/viewmodels/log.js',
 		'js/app/viewmodels/usersettings.js',
 		'js/app/viewmodels/change.js',
+		'js/app/viewmodels/changenozzle.js',
 		'js/app/viewmodels/wizard.js',
 		'js/app/viewmodels/about.js'
 	]

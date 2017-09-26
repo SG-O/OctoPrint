@@ -452,7 +452,6 @@ def _process_templates():
 		tab=dict(div=lambda x: "tab_plugin_" + x, template=lambda x: x + "_tab.jinja2", to_entry=lambda data: (data["name"], data)),
 		settings=dict(div=lambda x: "settings_plugin_" + x, template=lambda x: x + "_settings.jinja2", to_entry=lambda data: (data["name"], data)),
 		usersettings=dict(div=lambda x: "usersettings_plugin_" + x, template=lambda x: x + "_usersettings.jinja2", to_entry=lambda data: (data["name"], data)),
-		change=dict(div=lambda x: "change_plugin_" + x, template=lambda x: x + "_change.jinja2", to_entry=lambda data: (data["name"], data)),
 		wizard=dict(div=lambda x: "wizard_plugin_" + x, template=lambda x: x + "_wizard.jinja2", to_entry=lambda data: (data["name"], data)),
 		about=dict(div=lambda x: "about_plugin_" + x, template=lambda x: x + "_about.jinja2", to_entry=lambda data: (data["name"], data)),
 		generic=dict(template=lambda x: x + ".jinja2", to_entry=lambda data: data)
@@ -465,7 +464,6 @@ def _process_templates():
 		tab=dict(add="append", key="name"),
 		settings=dict(add="custom_append", key="name", custom_add_entries=lambda missing: dict(section_plugins=(gettext("Plugins"), None)), custom_add_order=lambda missing: ["section_plugins"] + missing),
 		usersettings=dict(add="append", key="name"),
-		change=dict(add="prepend", key=None),
 		wizard=dict(add="append", key="name", key_extractor=lambda d, k: "0:{}".format(d[0]) if "mandatory" in d[1] and d[1]["mandatory"] else "1:{}".format(d[0])),
 		about=dict(add="append", key="name"),
 		generic=dict(add="append", key=None)
@@ -568,11 +566,6 @@ def _process_templates():
 	templates["usersettings"]["entries"] = dict(
 		access=(gettext("Access"), dict(template="dialogs/usersettings/access.jinja2", _div="usersettings_access", custom_bindings=False)),
 		interface=(gettext("Interface"), dict(template="dialogs/usersettings/interface.jinja2", _div="usersettings_interface", custom_bindings=False)),
-	)
-	
-	templates["change"]["entries"] = dict(
-		filament=(gettext("Filament"), dict(template="dialogs/change/filament.jinja2", _div="change_filament", custom_bindings=False)),
-		nozzle=(gettext("Nozzle"), dict(template="dialogs/change/nozzle.jinja2", _div="change_nozzle", custom_bindings=False)),
 	)
 
 	# wizard

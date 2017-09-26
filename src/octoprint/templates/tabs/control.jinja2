@@ -101,10 +101,11 @@
         </div>
         <button class="btn btn-block control-box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.sendExtrudeCommand() }">{{ _('Extrude') }}</button>
         <button class="btn btn-block control-box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.sendRetractCommand() }">{{ _('Retract') }}</button>
-		<button class="btn btn-block control-box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.change.show() }">{{ _('Change') }}</button>
         <!-- Flow rate -->
         <input style="width: 100px" type="number" data-bind="slider: {min: 75, max: 125, step: 1, value: flowRate, tooltip: 'hide'}">
         <button class="btn btn-block control-box" data-bind="enable: isOperational() && loginState.isUser(), click: function() { $root.sendFlowRateCommand() }">{{ _('Flow rate:') }}<span data-bind="text: flowRate() + '%'"></span></button>
+		<button class="btn btn-block control-box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.change.show() }">{{ _('Change Filament') }}</button>
+		<button class="btn btn-block control-box" data-bind="enable: isOperational() && !isPrinting() && loginState.isUser(), click: function() { $root.changenozzle.show() }">{{ _('Change Nozzle') }}</button>
     </div>
 </div>
 <!-- General control panel -->

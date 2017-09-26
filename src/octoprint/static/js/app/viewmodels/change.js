@@ -81,9 +81,9 @@ $(function() {
         });
 		
 		self.isSecondStep = ko.pureComputed(function () {
-			if (self.step()  == 3) {
+			if (self.step()  == 1) {
 				OctoPrint.printer.selectTool(self.currentTool);
-				OctoPrint.printer.extrude(-20);
+				OctoPrint.printer.extrude(-100);
 			}
             return self.step() == 1;
         });
