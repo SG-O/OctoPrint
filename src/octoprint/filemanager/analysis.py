@@ -324,7 +324,7 @@ class GcodeAnalysisQueue(AbstractAnalysisQueue):
 			result["printingArea"] = self._gcode.printing_area
 			result["dimensions"] = self._gcode.dimensions
 			result["layers"] = self._gcode.zLayerNum
-			["layerList"] = self._gcode.layerString
+			result["layerList"] = self._gcode.layerString
 			# self._logger.info("Layers: {}".format(self._gcode.zLayerNum))
 			if self._gcode.totalMoveTimeMinute:
 				result["estimatedPrintTime"] = self._gcode.totalMoveTimeMinute * 60
