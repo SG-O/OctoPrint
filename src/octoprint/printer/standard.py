@@ -918,7 +918,7 @@ class Printer(PrinterInterface, comm.MachineComPrintCallback):
 							layers = fileData["analysis"]["layers"]
 						if "layerList" in fileData["analysis"].keys():
 							layerList = fileData["analysis"]["layerList"]
-							self._logger.info("Layers: {}".format(layerList))
+							# self._logger.info("Layers: {}".format(layerList))
 					if "statistics" in fileData:
 						printer_profile = self._printerProfileManager.get_current_or_default()["id"]
 						if "averagePrintTime" in fileData["statistics"] and printer_profile in fileData["statistics"]["averagePrintTime"]:
