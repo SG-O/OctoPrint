@@ -371,8 +371,9 @@ class gcode(object):
 								elif layerCurrentZ > layerPrevZ:
 									if e > 0:
 										layerPrevZ = layerCurrentZ
-										layerList.append(readBytes)
-										layerCount += 1
+										if layerCount <= 1000:
+											layerList.append(readBytes)
+											layerCount += 1
 
 					else:
 						e = 0.0
